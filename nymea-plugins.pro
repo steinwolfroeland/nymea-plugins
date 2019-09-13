@@ -27,6 +27,7 @@ PLUGIN_DIRS = \
     keba                \
     kodi                \
     lgsmarttv           \
+    logfilepublisher    \
     mailnotification    \
     mqttclient          \
     nanoleaf            \
