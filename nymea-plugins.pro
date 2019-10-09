@@ -26,6 +26,7 @@ PLUGIN_DIRS = \
     kodi                \
     leynew              \
     lgsmarttv           \
+    lukeroberts         \
     mailnotification    \
     mqttclient          \
     nanoleaf            \
