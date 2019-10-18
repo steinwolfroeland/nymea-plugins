@@ -19,6 +19,7 @@ PLUGIN_DIRS = \
     elgato              \
     eq-3                \
     flowercare          \
+    ftpfiletransfer     \
     genericelements     \
     genericthings       \
     gpio                \
@@ -27,7 +28,6 @@ PLUGIN_DIRS = \
     keba                \
     kodi                \
     lgsmarttv           \
-    logfilepublisher    \
     mailnotification    \
     mqttclient          \
     nanoleaf            \
