@@ -51,6 +51,7 @@ PLUGIN_DIRS = \
     wakeonlan           \
     wemo                \
     ws2812fx            \
+    yeelight            \
 
 
 message(============================================)
