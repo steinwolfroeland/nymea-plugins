@@ -48,7 +48,8 @@ IntegrationPluginPushNotifications::IntegrationPluginPushNotifications(QObject* 
     settings.beginGroup("PushNotifications");
     if (settings.contains("firebaseServerToken")) {
         m_firebaseServerToken = settings.value("firebaseServerToken").toByteArray();
-        qCDebug(dcPushNotifications()) << "Using custom Firebase server token:" << m_firebaseServerToken.replace(m_firebaseServerToken.length() - 10, 10, "**********");
+        QByteArray printedCopy = m_firebaseServerToken;
+        qCDebug(dcPushNotifications()) << "Using custom Firebase server token:" << printedCopy.replace(printedCopy.length() - 30, 30, "******************************");
     }
     settings.endGroup();
 }
@@ -177,7 +178,7 @@ void IntegrationPluginPushNotifications::executeAction(ThingActionInfo *info)
         QJsonParseError error;
         QJsonDocument jsonDoc = QJsonDocument::fromJson(data, &error);
         if (error.error != QJsonParseError::NoError) {
-            qCWarning(dcPushNotifications()) << "Error reading reply from Pushbullet for" << info->thing()->name() << info->thing()->id().toString() << error.errorString();
+            qCWarning(dcPushNotifications()) << "Error reading reply from server for" << info->thing()->name() << info->thing()->id().toString() << error.errorString();
             qCWarning(dcPushNotifications()) << qUtf8Printable(data);
             info->finish(Thing::ThingErrorHardwareFailure);
             return;
@@ -188,11 +189,15 @@ void IntegrationPluginPushNotifications::executeAction(ThingActionInfo *info)
 
         if (pushService == "GCM" || pushService == "APNs") {
             if (replyMap.value("success").toInt() != 1) {
+                qCWarning(dcPushNotifications()) << "Error sending push notifcation:" << qUtf8Printable(jsonDoc.toJson());
                 info->finish(Thing::ThingErrorHardwareFailure);
+                return;
             }
         } else if (pushService == "UBPorts") {
             if (!replyMap.value("ok").toBool()) {
+                qCWarning(dcPushNotifications()) << "Error sending push notifcation:" << qUtf8Printable(jsonDoc.toJson());
                 info->finish(Thing::ThingErrorHardwareFailure);
+                return;
             }
         }
 
