@@ -62,10 +62,12 @@ IntegrationPluginPushNotifications::~IntegrationPluginPushNotifications()
 void IntegrationPluginPushNotifications::setupThing(ThingSetupInfo *info)
 {
     Thing *thing = info->thing();
-    qCDebug(dcPushNotifications()) << "Setting up push notifications" << thing->name() << thing->id().toString();
 
     QString token = thing->paramValue(pushNotificationsThingTokenParamTypeId).toString();
     QString pushService = thing->paramValue(pushNotificationsThingServiceParamTypeId).toString();
+    QString clientId = thing->paramValue(pushNotificationsThingClientIdParamTypeId).toString();
+
+    qCDebug(dcPushNotifications()) << "Setting up push notifications" << thing->name() << "(" << clientId << ") for service" << pushService << "with token" << token;
 
     if (token.isEmpty()) {
         //: Error setting up thing

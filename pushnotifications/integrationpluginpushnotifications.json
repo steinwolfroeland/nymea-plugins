@@ -27,6 +27,12 @@
                             "name": "token",
                             "displayName": "access token",
                             "type": "QString"
+                        },
+                        {
+                            "id": "d76da367-64e3-4b7d-aa84-c96b3acfb65e",
+                            "name": "clientId",
+                            "displayName": "Client ID",
+                            "type": "QString"
                         }
                     ],
                     "actionTypes": [
